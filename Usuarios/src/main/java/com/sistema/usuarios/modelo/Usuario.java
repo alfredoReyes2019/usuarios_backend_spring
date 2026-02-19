@@ -3,8 +3,10 @@ package com.sistema.usuarios.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +28,6 @@ public class Usuario implements UserDetails {
     private String email;
     private String telefono;
     private boolean enabled = true;
-    private String perfil;
 
     public Long getId() {
         return id;
@@ -92,15 +93,7 @@ public class Usuario implements UserDetails {
         this.enabled = enabled;
     }
 
-    public String getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(String perfil) {
-        this.perfil = perfil;
-    }
-
-    public Set<UsuarioRol> getUsuarioRoles() {
+     public Set<UsuarioRol> getUsuarioRoles() {
         return usuarioRoles;
     }
 
@@ -118,7 +111,6 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         Set<Authority> autoridades = new HashSet<>();
         this.usuarioRoles.forEach(usuarioRol -> {
             autoridades.add(new Authority(usuarioRol.getRol().getNombre()));

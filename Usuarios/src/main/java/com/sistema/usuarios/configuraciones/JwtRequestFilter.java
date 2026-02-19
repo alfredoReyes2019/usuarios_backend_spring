@@ -35,7 +35,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         String uri = request.getRequestURI();
-        if (uri.equals("/generate-token")) {
+        if (uri.equals("/generate-token") || uri.equals("/usuarios/")) {
             filterChain.doFilter(request, response); // dejar pasar sin validar JWT
             return;
         }

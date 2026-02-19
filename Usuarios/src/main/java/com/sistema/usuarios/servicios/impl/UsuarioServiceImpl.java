@@ -5,6 +5,8 @@ import com.sistema.usuarios.repositorios.UsuarioRepository;
 import com.sistema.usuarios.modelo.Usuario;
 import com.sistema.usuarios.modelo.UsuarioRol;
 import com.sistema.usuario.servicios.UsuarioService;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +48,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void eliminarUsuario(Long usuarioId) {
         usuarioRepository.deleteById(usuarioId);
+    }
+
+    @Override
+    public List<Usuario> obtenerTodos() {
+        return usuarioRepository.findAll();
+    }
+
+    @Override
+    public Optional<Usuario> obtenerUsuariobyId(Long usuarioId) {
+        return usuarioRepository.findById(usuarioId);
     }
 }
